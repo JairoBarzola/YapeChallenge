@@ -3,6 +3,7 @@ package com.jairbarzola.yapechallenge.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jairbarzola.yapechallenge.core.common.ResultType
+import com.jairbarzola.yapechallenge.core.common.StringUtils.unaccent
 import com.jairbarzola.yapechallenge.domain.entity.Ingredient
 import com.jairbarzola.yapechallenge.domain.entity.RecipeList
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeListUseCase
@@ -52,15 +53,15 @@ class RecipeListViewModel @Inject constructor(
         }
     }
 
-    fun searchRecipes(query: String){
+    fun searchRecipes(query: String) {
         viewModelScope.launch(coroutineDispatcher) {
-            if(query.isEmpty()) {
+            if (query.isEmpty()) {
                 _screenState.value = RecipeListState.Success(recipeList)
                 return@launch
             }
             val results = recipeList.filter {
-                it.name.contains(query.trim(), ignoreCase = true)
-                        || searchInIngredients(it.ingredients, query.trim())
+                it.name.unaccent().contains(query.trim().unaccent(), ignoreCase = true)
+                        || searchInIngredients(it.ingredients, query.trim().unaccent())
             }
 
             _screenState.value = RecipeListState.Success(results)
@@ -68,6 +69,6 @@ class RecipeListViewModel @Inject constructor(
     }
 
     private fun searchInIngredients(ingredients: List<Ingredient>, query: String): Boolean {
-        return ingredients.firstOrNull{ it.name.contains(query)} != null
+        return ingredients.firstOrNull { it.name.unaccent().contains(query) } != null
     }
 }

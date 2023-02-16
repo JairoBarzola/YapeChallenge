@@ -95,4 +95,77 @@ class RecipeListViewModelTest {
                 viewModel.screenState.value.javaClass.simpleName
             )
         }
+
+
+    @Test
+    fun `when searching returns ResultSuccess with list empty`() =
+        runBlocking {
+            //Arrange
+            val query = "no coincide"
+            whenever(getRecipeListUseCase()).thenReturn(
+                ResultType.Success(FakeDataSource.list)
+            )
+            //Act
+            viewModel = RecipeListViewModel(getRecipeListUseCase, Dispatchers.Unconfined)
+            viewModel.searchRecipes(query)
+            //Assert
+            assertEquals(
+                0,
+                (viewModel.screenState.value as RecipeListState.Success).list.size
+            )
+        }
+
+    @Test
+    fun `when searching returns ResultSuccess with list two elements`() =
+        runBlocking {
+            //Arrange
+            val query = "rocoto"
+            whenever(getRecipeListUseCase()).thenReturn(
+                ResultType.Success(FakeDataSource.list)
+            )
+            //Act
+            viewModel = RecipeListViewModel(getRecipeListUseCase, Dispatchers.Unconfined)
+            viewModel.searchRecipes(query)
+            //Assert
+            assertEquals(
+                2,
+                (viewModel.screenState.value as RecipeListState.Success).list.size
+            )
+        }
+
+    @Test
+    fun `when search query hasn't accent mark and returns ResultSuccess with list one element`() =
+        runBlocking {
+            //Arrange
+            val query = "azucar"
+            whenever(getRecipeListUseCase()).thenReturn(
+                ResultType.Success(FakeDataSource.list)
+            )
+            //Act
+            viewModel = RecipeListViewModel(getRecipeListUseCase, Dispatchers.Unconfined)
+            viewModel.searchRecipes(query)
+            //Assert
+            assertEquals(
+                1,
+                (viewModel.screenState.value as RecipeListState.Success).list.size
+            )
+        }
+
+    @Test
+    fun `when search query is empty and returns ResultSuccess with all elements`() =
+        runBlocking {
+            //Arrange
+            val query = ""
+            whenever(getRecipeListUseCase()).thenReturn(
+                ResultType.Success(FakeDataSource.list)
+            )
+            //Act
+            viewModel = RecipeListViewModel(getRecipeListUseCase, Dispatchers.Unconfined)
+            viewModel.searchRecipes(query)
+            //Assert
+            assertEquals(
+                4,
+                (viewModel.screenState.value as RecipeListState.Success).list.size
+            )
+        }
 }
