@@ -7,6 +7,7 @@ import com.jairbarzola.yapechallenge.domain.entity.Ingredient
 import com.jairbarzola.yapechallenge.domain.entity.RecipeList
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeListViewModel @Inject constructor(
-    val getRecipeListUseCase: GetRecipeListUseCase
+    val getRecipeListUseCase: GetRecipeListUseCase,
+    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
 
@@ -29,7 +31,7 @@ class RecipeListViewModel @Inject constructor(
     }
 
     fun getRecipeList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(coroutineDispatcher) {
 
             _screenState.value = RecipeListState.Loading
 
@@ -51,7 +53,7 @@ class RecipeListViewModel @Inject constructor(
     }
 
     fun searchRecipes(query: String){
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(coroutineDispatcher) {
             if(query.isEmpty()) {
                 _screenState.value = RecipeListState.Success(recipeList)
                 return@launch

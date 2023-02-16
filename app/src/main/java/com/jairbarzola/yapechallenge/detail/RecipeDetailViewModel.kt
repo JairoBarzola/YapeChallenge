@@ -7,6 +7,7 @@ import com.jairbarzola.yapechallenge.core.common.ResultType
 import com.jairbarzola.yapechallenge.detail.navigation.RecipeDetailNavigation
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
     val getRecipeDetailUseCase: GetRecipeDetailUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow<RecipeDetailState>(RecipeDetailState.Loading)
@@ -29,7 +31,7 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
     fun getRecipeDetail() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(coroutineDispatcher) {
             _screenState.value = RecipeDetailState.Loading
 
             when (val result = getRecipeDetailUseCase(recipeId.orEmpty())){

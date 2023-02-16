@@ -30,6 +30,21 @@ fun RecipeListScreen(
     viewModel: RecipeListViewModel = hiltViewModel(), navigateToDetail: (String) -> Unit
 ) {
     val screenState = viewModel.screenState.collectAsState().value
+    RecipeListScreen(
+        screenState = screenState,
+        navigateToDetail = navigateToDetail,
+        onSearchRecipes = { viewModel.searchRecipes(it) },
+        getRecipeList = {viewModel.getRecipeList()}
+    )
+}
+
+@Composable
+fun RecipeListScreen(
+    screenState: RecipeListState,
+    navigateToDetail: (String) -> Unit,
+    onSearchRecipes: (String) -> Unit,
+    getRecipeList: () -> Unit
+) {
     when (screenState) {
 
         is RecipeListState.Loading -> {
@@ -40,15 +55,15 @@ fun RecipeListScreen(
             RecipeListContent(
                 recipeList = screenState.list,
                 navigateToDetail = { navigateToDetail(it) },
-                onSearchRecipes = { viewModel.searchRecipes(it) })
+                onSearchRecipes = { onSearchRecipes(it) })
         }
 
         is RecipeListState.Empty -> {
-            RecipeListEmpty(getRecipeList = { viewModel.getRecipeList() })
+            RecipeListEmpty(getRecipeList = { getRecipeList() })
         }
 
         is RecipeListState.Error -> {
-            RecipeListError(getRecipeList = { viewModel.getRecipeList() })
+            RecipeListError(getRecipeList = { getRecipeList() })
         }
     }
 }

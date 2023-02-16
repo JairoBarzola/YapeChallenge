@@ -1,6 +1,5 @@
 package com.jairbarzola.yapechallenge.core.networking
 
-import android.content.Context
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import okhttp3.TlsVersion
@@ -17,8 +16,8 @@ open class BaseApiClient<T>(private val classT: Class<T>) {
         const val WRITE_TIMEOUT: Long = 180L
     }
 
-    open fun getApiClient(context: Context): T {
-        val okHttpClient = okHttpClient(context)
+    open fun getApiClient(): T {
+        val okHttpClient = okHttpClient()
         val retrofitBuilder = Retrofit.Builder().apply {
             baseUrl(URL_SERVER)
             client(okHttpClient)
@@ -29,7 +28,7 @@ open class BaseApiClient<T>(private val classT: Class<T>) {
         return retrofit.create(classT)
     }
 
-    private fun okHttpClient(context: Context): OkHttpClient {
+    private fun okHttpClient(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
