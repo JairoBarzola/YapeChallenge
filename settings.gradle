@@ -14,3 +14,13 @@ dependencyResolutionManagement {
 }
 rootProject.name = "YapeChallenge"
 include ':app'
+include ':domain'
+include ':data'
+include ':core'
+include ':core:common'
+include ':core:networking'
+include ':core:designsystem'
+include ':feature'
+include ':feature:detail'
+include ':feature:list'
+include ':feature:map'

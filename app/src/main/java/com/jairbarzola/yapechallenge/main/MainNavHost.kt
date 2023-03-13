@@ -28,14 +28,14 @@ fun MainNavHost(
             }
         )
         detailScreen(
-            navigateToMap = {lat, long->
+            navigateToMap = { lat, long ->
                 navHostController.navigate("${MapNavigation.route}/$lat/$long")
             },
-            navigateToBack = {navHostController.popBackStack()}
+            navigateToBack = { navHostController.popBackStack() }
 
         )
         mapScreen(
-            navigateToBack = {navHostController.popBackStack()}
+            navigateToBack = { navHostController.popBackStack() }
         )
     }
 }

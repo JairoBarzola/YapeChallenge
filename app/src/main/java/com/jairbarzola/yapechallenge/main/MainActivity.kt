@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.jairbarzola.yapechallenge.core.designsystem.YapeChallengeTheme
+import com.jairbarzola.yapechallenge.designsystem.YapeChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

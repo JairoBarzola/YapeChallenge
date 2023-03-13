@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_empty_title">No se encontro la receta</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="retry">Reintentar</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="time">Tiempo</string>
+    <string name="max_difficulty">5</string>
+</resources>

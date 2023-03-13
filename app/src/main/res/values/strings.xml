@@ -1,9 +1,3 @@
 <resources>
     <string name="app_name">YapeChallenge</string>
-    <string name="serch">Buscador</string>
-    <string name="list_empty_title">No se encontraron recetas</string>
-    <string name="list_error_title">Ocurrio un error al obtener las recetas</string>
-
-    <string name="api_key">AIzaSyAiKfov5etjTxjlRQSjTnXA9HT0GdQSDkI</string>
-    <string name="detail_empty_title">No se encontro la receta</string>
 </resources>
