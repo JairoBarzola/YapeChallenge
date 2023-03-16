@@ -1,7 +1,7 @@
 package com.jairbarzola.yapechallenge.domain
 
 import com.jairbarzola.yapechallenge.core.common.Failure
-import com.jairbarzola.yapechallenge.core.common.ResultType
+import com.jairbarzola.yapechallenge.core.common.Result
 import com.jairbarzola.yapechallenge.data.fake.FakeDataSource.detail
 import com.jairbarzola.yapechallenge.domain.repository.RecipeRepository
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeDetailUseCase
@@ -32,12 +32,12 @@ class GetRecipeDetailUseCaseTest {
         //Arrange
         val id = "1"
         whenever(getRecipeDetailUseCase(id)).thenReturn(
-            ResultType.Success(detail)
+            Result.Success(detail)
         )
         //Act
         val result = getRecipeDetailUseCase.invoke(id)
         //Assert
-        Assert.assertEquals((result as ResultType.Success).value.id,id)
+        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value.id,id)
     }
 
     @Test
@@ -48,12 +48,12 @@ class GetRecipeDetailUseCaseTest {
         val error = Failure.Message("No se pudo obtener la receta")
 
         whenever(getRecipeDetailUseCase(id)).thenReturn(
-            ResultType.Error(error)
+            Result.Error(error)
         )
         //Act
         val result = getRecipeDetailUseCase.invoke(id)
         //Assert
-        Assert.assertEquals((result as ResultType.Error).value,error)
+        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value,error)
     }
 
 }

@@ -1,7 +1,8 @@
 package com.jairbarzola.yapechallenge.list
 
-import com.jairbarzola.yapechallenge.data.fake.FakeDataSource
+import com.jairbarzola.yapechallenge.core.common.Result
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeListUseCase
+import com.jairbarzola.yapechallenge.list.helper.listHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
@@ -38,7 +39,7 @@ class RecipeListViewModelTest {
         )
         //Assert
         assertEquals(
-            com.jairbarzola.yapechallenge.list.RecipeListState.Loading::class.java.simpleName,
+            RecipeListState.Loading::class.java.simpleName,
             viewModel.screenState.value.javaClass.simpleName
         )
     }
@@ -48,7 +49,7 @@ class RecipeListViewModelTest {
         runBlocking {
             //Arrange
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(com.jairbarzola.yapechallenge.data.fake.FakeDataSource.list)
+                Result.Success(listHelper)
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -58,7 +59,7 @@ class RecipeListViewModelTest {
             viewModel.getRecipeList()
             //Assert
             assertEquals(
-                com.jairbarzola.yapechallenge.list.RecipeListState.Success::class.java.simpleName,
+                RecipeListState.Success::class.java.simpleName,
                 viewModel.screenState.value.javaClass.simpleName
             )
         }
@@ -69,7 +70,7 @@ class RecipeListViewModelTest {
         runBlocking {
             //Arrange
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Error(com.jairbarzola.yapechallenge.core.common.Failure.Message("No se pudo obtener las recetas"))
+                com.jairbarzola.yapechallenge.core.common.Result.Error(com.jairbarzola.yapechallenge.core.common.Failure.Message("No se pudo obtener las recetas"))
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -79,7 +80,7 @@ class RecipeListViewModelTest {
             viewModel.getRecipeList()
             //Assert
             assertEquals(
-                com.jairbarzola.yapechallenge.list.RecipeListState.Error::class.java.simpleName,
+                RecipeListState.Error::class.java.simpleName,
                 viewModel.screenState.value.javaClass.simpleName
             )
         }
@@ -89,7 +90,7 @@ class RecipeListViewModelTest {
         runBlocking {
             //Arrange
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(listOf())
+                Result.Success(listOf())
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -99,7 +100,7 @@ class RecipeListViewModelTest {
             viewModel.getRecipeList()
             //Assert
             assertEquals(
-                com.jairbarzola.yapechallenge.list.RecipeListState.Empty::class.java.simpleName,
+                RecipeListState.Empty::class.java.simpleName,
                 viewModel.screenState.value.javaClass.simpleName
             )
         }
@@ -111,7 +112,7 @@ class RecipeListViewModelTest {
             //Arrange
             val query = "no coincide"
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(com.jairbarzola.yapechallenge.data.fake.FakeDataSource.list)
+                Result.Success(listHelper)
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -122,7 +123,7 @@ class RecipeListViewModelTest {
             //Assert
             assertEquals(
                 0,
-                (viewModel.screenState.value as com.jairbarzola.yapechallenge.list.RecipeListState.Success).list.size
+                (viewModel.screenState.value as RecipeListState.Success).list.size
             )
         }
 
@@ -132,7 +133,7 @@ class RecipeListViewModelTest {
             //Arrange
             val query = "rocoto"
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(com.jairbarzola.yapechallenge.data.fake.FakeDataSource.list)
+                Result.Success(listHelper)
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -143,7 +144,7 @@ class RecipeListViewModelTest {
             //Assert
             assertEquals(
                 2,
-                (viewModel.screenState.value as com.jairbarzola.yapechallenge.list.RecipeListState.Success).list.size
+                (viewModel.screenState.value as RecipeListState.Success).list.size
             )
         }
 
@@ -153,7 +154,7 @@ class RecipeListViewModelTest {
             //Arrange
             val query = "azucar"
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(com.jairbarzola.yapechallenge.data.fake.FakeDataSource.list)
+                Result.Success(listHelper)
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -164,7 +165,7 @@ class RecipeListViewModelTest {
             //Assert
             assertEquals(
                 1,
-                (viewModel.screenState.value as com.jairbarzola.yapechallenge.list.RecipeListState.Success).list.size
+                (viewModel.screenState.value as RecipeListState.Success).list.size
             )
         }
 
@@ -174,7 +175,7 @@ class RecipeListViewModelTest {
             //Arrange
             val query = ""
             whenever(getRecipeListUseCase()).thenReturn(
-                com.jairbarzola.yapechallenge.core.common.ResultType.Success(com.jairbarzola.yapechallenge.data.fake.FakeDataSource.list)
+                Result.Success(listHelper)
             )
             //Act
             viewModel = RecipeListViewModel(
@@ -185,7 +186,7 @@ class RecipeListViewModelTest {
             //Assert
             assertEquals(
                 4,
-                (viewModel.screenState.value as com.jairbarzola.yapechallenge.list.RecipeListState.Success).list.size
+                (viewModel.screenState.value as RecipeListState.Success).list.size
             )
         }
 }

@@ -2,7 +2,7 @@ package com.jairbarzola.yapechallenge.detail
 
 import androidx.lifecycle.SavedStateHandle
 import com.jairbarzola.yapechallenge.core.common.Failure
-import com.jairbarzola.yapechallenge.core.common.ResultType
+import com.jairbarzola.yapechallenge.core.common.Result
 import com.jairbarzola.yapechallenge.detail.helper.detailHelper
 import com.jairbarzola.yapechallenge.detail.navigation.RecipeDetailNavigation
 import com.jairbarzola.yapechallenge.domain.usecase.GetRecipeDetailUseCase
@@ -58,7 +58,7 @@ class RecipeDetailViewModelTest {
                 set(RecipeDetailNavigation.id, id)
             }
             whenever(getRecipeDetailUseCase(id)).thenReturn(
-                ResultType.Success(detailHelper)
+                Result.Success(detailHelper)
             )
             //Act
             viewModel = RecipeDetailViewModel(
@@ -84,7 +84,7 @@ class RecipeDetailViewModelTest {
                 set(RecipeDetailNavigation.id, id)
             }
             whenever(getRecipeDetailUseCase(id)).thenReturn(
-                ResultType.Error(Failure.Message("No se pudo obtener la receta"))
+                Result.Error(Failure.Message("No se pudo obtener la receta"))
             )
             //Act
             viewModel = RecipeDetailViewModel(

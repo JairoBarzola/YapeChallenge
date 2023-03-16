@@ -34,10 +34,10 @@ class RecipeDetailViewModel @Inject constructor(
             _screenState.value = RecipeDetailState.Loading
 
             when (val result = getRecipeDetailUseCase(recipeId.orEmpty())){
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Success ->{
+                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success ->{
                     _screenState.value = RecipeDetailState.Success(result.value)
                 }
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Error ->{
+                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error ->{
                     _screenState.value = RecipeDetailState.Error
                 }
             }

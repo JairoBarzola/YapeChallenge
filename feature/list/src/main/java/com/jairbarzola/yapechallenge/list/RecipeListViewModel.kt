@@ -2,7 +2,7 @@ package com.jairbarzola.yapechallenge.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jairbarzola.yapechallenge.core.common.ResultType
+import com.jairbarzola.yapechallenge.core.common.Result
 import com.jairbarzola.yapechallenge.core.common.StringUtils.unaccent
 import com.jairbarzola.yapechallenge.domain.entity.Ingredient
 import com.jairbarzola.yapechallenge.domain.entity.RecipeList
@@ -37,7 +37,7 @@ class RecipeListViewModel @Inject constructor(
             _screenState.value = RecipeListState.Loading
 
             when (val result = getRecipeListUseCase()) {
-                is ResultType.Success -> {
+                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success -> {
                     if (result.value.isEmpty()) {
                         _screenState.value = RecipeListState.Empty
                     } else {
@@ -45,7 +45,7 @@ class RecipeListViewModel @Inject constructor(
                         _screenState.value = RecipeListState.Success(result.value)
                     }
                 }
-                is ResultType.Error -> {
+                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error -> {
                     _screenState.value = RecipeListState.Error
                 }
             }
