@@ -47,7 +47,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipesList()
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value).isEmpty()
+        assertThat((actualResponse as Result.Success).value).isEmpty()
 
     }
 
@@ -61,7 +61,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipesList()
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value).hasSize(recipes.size)
+        assertThat((actualResponse as Result.Success).value).hasSize(recipes.size)
 
     }
 
@@ -73,7 +73,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipesList()
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value).isInstanceOf(
+        assertThat((actualResponse as Result.Error).value).isInstanceOf(
             Failure.Message::class.java)
 
     }
@@ -88,7 +88,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipeDetail("1")
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value).isEqualTo(mockUser)
+        assertThat((actualResponse as Result.Success).value).isEqualTo(mockUser)
     }
 
 
@@ -100,7 +100,7 @@ class RecipeRepositoryImplTest {
             mockWebServer.enqueue(expectedResponse)
 
             val actualResponse = repository.getRecipeDetail("5")
-            assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value).isInstanceOf(
+            assertThat((actualResponse as Result.Error).value).isInstanceOf(
                 Failure.Message::class.java)
         }
 
@@ -113,7 +113,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipesList()
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value).isInstanceOf(
+        assertThat((actualResponse as Result.Error).value).isInstanceOf(
             Failure.Exception::class.java)
 
     }
@@ -126,7 +126,7 @@ class RecipeRepositoryImplTest {
 
         val actualResponse = repository.getRecipeDetail("1")
 
-        assertThat((actualResponse as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value).isInstanceOf(
+        assertThat((actualResponse as Result.Error).value).isInstanceOf(
             Failure.Exception::class.java)
 
     }

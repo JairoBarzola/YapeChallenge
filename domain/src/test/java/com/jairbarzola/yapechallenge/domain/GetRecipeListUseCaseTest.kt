@@ -34,7 +34,7 @@ class GetRecipeListUseCaseTest {
         //Act
         val result = getRecipeListUseCase()
         //Assert
-        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value.size, FakeDataSource.list.size)
+        Assert.assertEquals((result as Result.Success).value.size, FakeDataSource.list.size)
     }
 
     @Test
@@ -49,6 +49,6 @@ class GetRecipeListUseCaseTest {
         //Act
         val result = getRecipeListUseCase()
         //Assert
-        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value, error)
+        Assert.assertEquals((result as Result.Error).value, error)
     }
 }

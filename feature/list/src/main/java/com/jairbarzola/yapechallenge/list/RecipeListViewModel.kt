@@ -37,7 +37,7 @@ class RecipeListViewModel @Inject constructor(
             _screenState.value = RecipeListState.Loading
 
             when (val result = getRecipeListUseCase()) {
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success -> {
+                is Result.Success -> {
                     if (result.value.isEmpty()) {
                         _screenState.value = RecipeListState.Empty
                     } else {
@@ -45,7 +45,7 @@ class RecipeListViewModel @Inject constructor(
                         _screenState.value = RecipeListState.Success(result.value)
                     }
                 }
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error -> {
+                is Result.Error -> {
                     _screenState.value = RecipeListState.Error
                 }
             }

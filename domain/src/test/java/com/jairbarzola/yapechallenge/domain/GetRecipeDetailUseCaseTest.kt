@@ -37,7 +37,7 @@ class GetRecipeDetailUseCaseTest {
         //Act
         val result = getRecipeDetailUseCase.invoke(id)
         //Assert
-        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success).value.id,id)
+        Assert.assertEquals((result as Result.Success).value.id,id)
     }
 
     @Test
@@ -53,7 +53,7 @@ class GetRecipeDetailUseCaseTest {
         //Act
         val result = getRecipeDetailUseCase.invoke(id)
         //Assert
-        Assert.assertEquals((result as com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error).value,error)
+        Assert.assertEquals((result as Result.Error).value,error)
     }
 
 }

@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.jairbarzola.yapechallenge.core.common.Result
 
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
@@ -34,10 +35,10 @@ class RecipeDetailViewModel @Inject constructor(
             _screenState.value = RecipeDetailState.Loading
 
             when (val result = getRecipeDetailUseCase(recipeId.orEmpty())){
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Success ->{
+                is Result.Success ->{
                     _screenState.value = RecipeDetailState.Success(result.value)
                 }
-                is com.jairbarzola.yapechallenge.core.common.ResultType.Result.Error ->{
+                is Result.Error ->{
                     _screenState.value = RecipeDetailState.Error
                 }
             }
