@@ -8,9 +8,6 @@ plugins {
 android {
     namespace = "com.jairbarzola.yapechallenge.domain"
     compileSdk = AppConfig.compileSDK
-    defaultConfig {
-        minSdk = AppConfig.minSDK
-    }
 }
 
 dependencies {

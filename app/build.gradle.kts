@@ -1,13 +1,13 @@
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
-    id ("kotlin-parcelize")
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace  = "com.jairbarzola.yapechallenge"
+    namespace = "com.jairbarzola.yapechallenge"
     compileSdk = AppConfig.compileSDK
 
     defaultConfig {
@@ -33,7 +33,7 @@ android {
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility  = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = AppConfig.jvmTarget
@@ -48,9 +48,6 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-    }
-    hilt {
-        enableAggregatingTask = true
     }
 }
 

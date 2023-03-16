@@ -13,7 +13,7 @@ object Versions {
     const val hilt = "2.44"
     const val navigationHilt = "1.0.0"
 
-    const val coreKtx = " 1.9.0"
+    const val coreKtx = "1.9.0"
     const val compose = "1.3.2"
     const val material = "1.0.1"
     const val viewModel = "2.5.1"
